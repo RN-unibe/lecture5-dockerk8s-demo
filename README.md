@@ -1,3 +1,12 @@
+Ramon Näf; 20-116-950 \
+GitHub Fork: https://github.com/RN-unibe/lecture5-dockerk8s-demo \
+DockerHub: https://hub.docker.com/u/rnunibe
+
+
+---
+---
+---
+
 # Lecture 5: Docker & Kubernetes Demo
 
 > DevOps for Cyber-Physical Systems | University of Bern
@@ -443,3 +452,93 @@ flowchart TB
 ---
 
 **University of Bern | DevOps for Cyber-Physical Systems**
+
+
+---
+# Submission
+
+## 1. Modify the Docker Setup
+
+### a) Add Adminer Service
+Added the following to `docker-compose.yml`:
+
+```
+  # ----------------------------------------------------------
+  # Adminer
+  # ----------------------------------------------------------
+  adminer:
+    image: adminer:latest
+    container_name: lecture5-adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - app-network
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+```
+
+![Alt text](1a4.png)
+
+
+### b) Change the Base Image
+**a)**
+In the `Dockerfile` I changed `FROM python:3.11-slim` to `FROM python:3.11-alpine`.
+For me, after changing the Python version and running *docker compose up*, it worked without any additional effort.
+
+
+**c)**
+The image with **python:3.11-slim** is about twice the size of the image with **python:3.11-alpine**.
+
+```
+rnunibe/lecture5-webapp:v1.0-alpine     eb5a32ab213e    127MB    31MB      
+rnunibe/lecture5-webapp:v1.0-slim       56a99bcc34f5    232MB    56.6MB 
+```
+
+---
+
+## 2. Docker Operations
+
+### (a) Image Tagging and Registry
+
+**c)**
+```
+docker build -t rnunibe/task-app:v1.0 .
+docker login -u rnunibe
+docker push rnunibe/task-app:v1.0
+```
+
+### (b) Container Inspection
+
+* **docker compose logs web**: Prints a quick summary of the status of the running container.
+* **docker inspect lecture5-web**: Shows detailed information about Docker-managed objects.
+* **docker stats**: Displays a live table of container stats such as CPU and memory usage.
+
+
+## 3. Deploy to Kubernetes
+### (a) Deploy to Application
+![Alt text](3af.png)
+
+
+### (b) Scale and Test Load Balancing
+
+**c)**
+![Alt text](3bc.png)
+
+
+**d)**
+Kubernetes distributes traffic using Services, which act as stable endpoints that route requests to a set of Pods. It uses built-in load balancing (typically round-robin) to spread traffic evenly across healthy Pods.
+
+
+### (c) Self-Healing
+**c)**
+![Alt text](3cc.png)
+
+
+**d)**
+Self-healing is important because it ensures that applications remain available even when individual components fail. In systems like Kubernetes, failed pods are automatically replaced, minimizing downtime and maintaining the desired state without manual intervention.

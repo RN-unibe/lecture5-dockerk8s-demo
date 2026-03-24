@@ -9,10 +9,10 @@
 # STEP 1: Start with official Python image
 # ----------------------------------------------------------
 # We use the slim variant for smaller size (~150MB vs ~900MB)
-FROM python:3.11-slim
+#FROM python:3.11-slim
 
 # Ex. 1b:
-#FROM python:3.11-alpine 
+FROM python:3.11-alpine 
 
 # STEP 2: Set the working directory
 # ----------------------------------------------------------

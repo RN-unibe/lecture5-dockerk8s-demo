@@ -7,7 +7,7 @@ import requests
 import time
 from collections import Counter
 
-SERVICE_URL = "http://192.168.49.2:30959/info"
+SERVICE_URL = "http://192.168.49.2:30554/info"
 NUM_REQUESTS = 20
 
 print(f"🚀 Testing load balancing across pods...")
