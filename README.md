@@ -483,7 +483,7 @@ Added the following to `docker-compose.yml`:
         condition: service_started
 ```
 
-![Alt text](1a4.png)
+![Alt text](https://github.com/RN-unibe/lecture5-dockerk8s-demo/blob/main/1a4.png?raw=true)
 
 
 ### b) Change the Base Image
@@ -522,13 +522,13 @@ docker push rnunibe/task-app:v1.0
 
 ## 3. Deploy to Kubernetes
 ### (a) Deploy to Application
-![Alt text](3af.png)
+![Alt text](https://github.com/RN-unibe/lecture5-dockerk8s-demo/blob/main/3af.png?raw=true)
 
 
 ### (b) Scale and Test Load Balancing
 
 **c)**
-![Alt text](3bc.png)
+![Alt text](https://github.com/RN-unibe/lecture5-dockerk8s-demo/blob/main/3bc.png?raw=true)
 
 
 **d)**
@@ -537,7 +537,7 @@ Kubernetes distributes traffic using Services, which act as stable endpoints tha
 
 ### (c) Self-Healing
 **c)**
-![Alt text](3cc.png)
+![Alt text](https://github.com/RN-unibe/lecture5-dockerk8s-demo/blob/main/3cc.png?raw=true)
 
 
 **d)**
